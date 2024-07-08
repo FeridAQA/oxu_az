@@ -1,0 +1,15 @@
+back-end
+
+məhsular get post yazılacaq 
+
+app i 
+
+img olacaq 
+title olacaq 
+catacory olacaq 
+data olacaq
+ like hələki formal olacaq
+
+front hissə
+ react yazılacaq 
+productlar map olub gələcək 
