@@ -14,7 +14,7 @@ const get_product = async (req, res) => {
 
 const get_by_id = async (req, res) => {
     try {
-        const {id}=req.params
+        const { id } = req.params
         const data = await product.findById(id)
         if (!data) {
             return res.status(404).send('seyfe tapilmadi')
@@ -26,18 +26,28 @@ const get_by_id = async (req, res) => {
     }
 }
 
-const del_product = async(req,res)=>{
+const del_all = async (req, res) => {
     try {
-        const {id}=req.params
-        const data=await product.findByIdAndDelete(id)
-        if(!data){
+        await product.collection.drop()
+        res.status(200).send('all deleted')
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send(error)
+    }
+}
+
+const del_product = async (req, res) => {
+    try {
+        const { id } = req.params
+        const data = await product.findByIdAndDelete(id)
+        if (!data) {
             return res.status(404).send('seyfe tapilmadi')
         }
         res.status(200).send(data)
     } catch (error) {
         console.log(error.message);
         res.status(500).send(error)
-        
+
     }
 }
 
@@ -82,4 +92,4 @@ const update_product = async (req, res) => {
 
 
 
-module.exports = { get_product, post_product,get_by_id,del_product ,update_product}
+module.exports = { get_product, post_product, get_by_id, del_product, update_product,del_all }
