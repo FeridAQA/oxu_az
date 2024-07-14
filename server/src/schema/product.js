@@ -21,6 +21,9 @@ const productSchema = new mongoose.Schema({
     dislike: {
         type: Number, default: 0
     },
+    update_pro:{
+        type:Boolean,default:false
+    },
     createDate: {
         type: Date,
         default: new Date().toISOString()

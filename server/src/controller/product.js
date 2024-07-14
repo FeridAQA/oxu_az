@@ -48,9 +48,38 @@ const post_product = async (req, res) => {
         res.status(200).send(data)
     } catch (error) {
         console.log(error.message);
-        res.status(200).send(error)
+        res.status(201).send(error)
     }
 }
 
 
-module.exports = { get_product, post_product,get_by_id,del_product }
+////
+
+const update_product = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const update = req.body;
+
+        console.log('Updating product with ID:', id);
+        console.log('Update data:', update);
+        update.update_pro = true;
+
+        const options = { new: true, runValidators: true }; // Yenilənmiş sənədi geri qaytar və validasiyanı işə sal
+
+        const updatedProduct = await product.findByIdAndUpdate(id, { $set: update }, options);
+
+        if (!updatedProduct) {
+            return res.status(404).send('Product not found');
+        }
+
+        console.log('Updated product:', updatedProduct);
+        res.status(200).send(updatedProduct);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ error: error.message });
+    }
+};
+
+
+
+module.exports = { get_product, post_product,get_by_id,del_product ,update_product}
